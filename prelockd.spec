@@ -61,7 +61,7 @@ in memory to improve system responsiveness under low-memory conditions.
 
 
 %changelog
-* Sun Oct  4 12:53:39 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-3
+* Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-3
 - Set BuildArch to noarch
 
 * Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-2
