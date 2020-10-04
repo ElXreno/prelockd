@@ -2,12 +2,13 @@
 
 Name:           prelockd
 Version:        0.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lock binaries and libraries in memory to improve system responsiveness under low-memory conditions
 
 License:        MIT
 URL:            https://github.com/hakavlad/prelockd
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source10:	%{name}.sysusers
 
 Patch10:	prelockd-rpm-drop-not-required-sections-from-install.patch
 
@@ -31,6 +32,10 @@ in memory to improve system responsiveness under low-memory conditions.
 %make_install PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
 
 
+%pre
+%sysusers_create_package %{name} %{SOURCE10}
+
+
 %post
 %systemd_post %{name}.service
 
@@ -49,10 +54,14 @@ in memory to improve system responsiveness under low-memory conditions.
 %{_sbindir}/%{name}
 %{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/%{name}.conf
+%dir %attr(755, %{name}, %{name}) %{_sharedstatedir}/%{name}
 
 
 
 %changelog
+* Sun Oct  4 12:32:01 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-2
+- Add prelockd user
+
 * Sun Oct  4 12:08:56 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-1
 - Initial packaging
 
