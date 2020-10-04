@@ -2,7 +2,7 @@
 
 Name:           prelockd
 Version:        0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lock binaries and libraries in memory to improve system responsiveness under low-memory conditions
 
 License:        MIT
@@ -11,6 +11,8 @@ Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source10:	%{name}.sysusers
 
 Patch10:	prelockd-rpm-drop-not-required-sections-from-install.patch
+
+BuildArch:      noarch
 
 BuildRequires:  systemd
 #Requires:       
@@ -59,6 +61,9 @@ in memory to improve system responsiveness under low-memory conditions.
 
 
 %changelog
+* Sun Oct  4 12:53:39 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-3
+- Set BuildArch to noarch
+
 * Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-2
 - Add prelockd user
 
