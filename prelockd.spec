@@ -59,9 +59,9 @@ in memory to improve system responsiveness under low-memory conditions.
 
 
 %changelog
-* Sun Oct  4 12:32:01 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-2
+* Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-2
 - Add prelockd user
 
-* Sun Oct  4 12:08:56 +03 2020 ElXreno <elxreno@gmail.com> - 0.6-1
+* Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-1
 - Initial packaging
 
