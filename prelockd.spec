@@ -1,21 +1,19 @@
 %global debug_package %{nil}
 
 Name:           prelockd
-Version:        0.6
-Release:        3%{?dist}
+Version:        0.9
+Release:        1%{?dist}
 Summary:        Lock binaries and libraries in memory to improve system responsiveness under low-memory conditions
 
 License:        MIT
 URL:            https://github.com/hakavlad/prelockd
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source10:	%{name}.sysusers
-
-Patch10:	prelockd-rpm-drop-not-required-sections-from-install.patch
+Source10:       %{name}.sysusers
 
 BuildArch:      noarch
 
+BuildRequires:  make
 BuildRequires:  systemd
-#Requires:       
 
 %description
 prelockd is a daemon that locks memory mapped binaries and libraries
@@ -25,13 +23,21 @@ in memory to improve system responsiveness under low-memory conditions.
 %prep
 %autosetup
 
+sed -i '
+    s|install.*MANPAGE.md.*||
+    s|useradd chcon daemon-reload||
+    ' Makefile
+
 
 %build
 # Not required
 
 
 %install
-%make_install PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} SYSTEMDUNITDIR=%{_unitdir}
+%make_install \
+    PREFIX=%{_prefix} \
+    SYSCONFDIR=%{_sysconfdir} \
+    SYSTEMDUNITDIR=%{_unitdir}
 
 
 %pre
@@ -57,10 +63,15 @@ in memory to improve system responsiveness under low-memory conditions.
 %{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %dir %attr(755, %{name}, %{name}) %{_sharedstatedir}/%{name}
+%{_datadir}/%{name}/
+%{_mandir}/man8/*.8.*
 
 
 
 %changelog
+* Wed May 05 2021 ElXreno <elxreno@gmail.com> - 0.9-1
+- Update to version 0.9
+
 * Sun Oct 4 2020 ElXreno <elxreno@gmail.com> - 0.6-3
 - Set BuildArch to noarch
 
