@@ -2,7 +2,7 @@
 
 Name:           prelockd
 Version:        0.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lock binaries and libraries in memory to improve system responsiveness under low-memory conditions
 
 License:        MIT
@@ -24,6 +24,7 @@ in memory to improve system responsiveness under low-memory conditions.
 %autosetup
 
 sed -i '
+    s|install.*README.md.*||
     s|install.*MANPAGE.md.*||
     s|useradd chcon daemon-reload||
     ' Makefile
@@ -69,6 +70,9 @@ sed -i '
 
 
 %changelog
+* Wed May 05 2021 ElXreno <elxreno@gmail.com> - 0.9-2
+- Fix epel7 & opensuse compilation error
+
 * Wed May 05 2021 ElXreno <elxreno@gmail.com> - 0.9-1
 - Update to version 0.9
 
